@@ -5,41 +5,32 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-    final String correctEmail = "work@live.com";
-    final String wrongEmail = "mailName.com";
-    final String name1 = "Evgen";
-    final String name2 = "PetrI";
-
-    User user1;
-    User user2;
-    User user3;
-
-    @BeforeEach
-    public void setUp() {
-        user1 = new User(name1, correctEmail);
-        user2 = new User(name2, wrongEmail);
-        user3 = new User();
-    }
+    private static final String CORRECT_LOGIN = "login";
+    private static final String CORRECT_EMAIL = "work@live.com";
+    private static final String INCORRECT_EMAIL = "mailName.com";
+    private static final String INCORRECT_LOGIN = "work@live.com";
     @Test
     @DisplayName("Тест проверки равны ли login и email (Они не должны быть равны)")
     void objectFieldsAreNotEquals() {
-        Assertions.assertNotEquals(user1.getEmail(), user1.getLogin());
+        Assertions.assertThrows(IllegalArgumentException.class,()-> new User(INCORRECT_LOGIN,CORRECT_EMAIL));
     }
     @Test
     @DisplayName("Тест проверки email (должны быть символы '.' и '@')")
     void checkEmails() {
-        Assertions.assertTrue(user1.checkEmails(user1.getEmail()));
+        Assertions.assertThrows(IllegalArgumentException.class,()-> new User(CORRECT_LOGIN,INCORRECT_EMAIL));
     }
     @Test
     @DisplayName("Тест конструктора с двумя параметрами")
     void testUserFullConstructor() {
-        Assertions.assertNotNull(user1.getLogin());
-        Assertions.assertNotNull(user1.getEmail());
+        User user = new User(CORRECT_LOGIN,CORRECT_EMAIL);
+        Assertions.assertNotNull(CORRECT_LOGIN,user.getLogin());
+        Assertions.assertNotNull(CORRECT_EMAIL,user.getEmail());
     }
     @Test
     @DisplayName("Тест пустого конструктора")
     void testUserEmptyConstructor() {
-        Assertions.assertNull(user3.getEmail());
-        Assertions.assertNull(user3.getLogin());
+        User user = new User();
+        Assertions.assertNull(user.getEmail());
+        Assertions.assertNull(user.getLogin());
     }
 }
