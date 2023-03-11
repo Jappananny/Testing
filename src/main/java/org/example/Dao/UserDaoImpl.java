@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao{
         return null;
     }
     @Override
-    public List<User> getAll(String login) {
-        return users.stream().toList();
+    public List getAll() {
+        return users;
     }
 }

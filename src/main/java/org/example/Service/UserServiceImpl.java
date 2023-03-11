@@ -1,16 +1,16 @@
 package org.example.Service;
-import org.example.Dao.UserDaoImpl;
+import org.example.Dao.UserDao;
 import org.example.model.User;
 
 public class UserServiceImpl implements UserService{
-    private final UserDaoImpl userDaoImpl;
-    public UserServiceImpl(UserDaoImpl userDaoImpl) {
-        this.userDaoImpl = userDaoImpl;
+    private final UserDao userDao;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
     @Override
     public boolean checkUserExist(User user) {
         if (user != null) {
-            return userDaoImpl.getUserByName(user.getLogin()) != null;
+            return userDao.getUserByName(user.getLogin()) != null;
         }
         return false;
     }
