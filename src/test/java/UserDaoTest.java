@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserDaoTest {
     UserDaoImpl dao = new UserDaoImpl();
     private  final User correctUser = new User("JohnSmith", "johnsmith");
-    private  final User incorrectUser = new User("JohnSmith", "jackblack");
+    private  final User incorrectUser = new User("JeckSmith", "jackblack");
 
     @Test
     public void findUserByName(){
@@ -20,6 +20,6 @@ public class UserDaoTest {
     }
     @Test
     public void notFindUserByName(){
-        assertNull(dao.getUserByName(incorrectUser.getLogin()).getPassword());
+        assertNull(dao.getUserByName(incorrectUser.getLogin()));
     }
 }
